@@ -58,6 +58,11 @@ typedef struct {
 #define FONTMETRICS_FLAGS_UNDERLINE_POSITION_IS_VALID (1U << 1)
 
 /**
+    A lightweight managed string.
+*/
+typedef struct sk_string_t sk_string_t;
+/**
+
     A sk_bitmap_t is an abstraction that specifies a raster bitmap.
 */
 typedef struct sk_bitmap_t sk_bitmap_t;
@@ -77,6 +82,8 @@ typedef struct sk_imagefilter_croprect_t sk_imagefilter_croprect_t;
     Typeface objects are immutable, and so they can be shared between threads.
 */
 typedef struct sk_typeface_t sk_typeface_t;
+typedef uint32_t sk_font_table_tag_t;
+
 /**
    Various stream types
 */
@@ -195,6 +202,18 @@ typedef enum {
     REPEAT_SK_MATRIX_CONVOLUTION_TILEMODE,
     CLAMP_TO_BLACK_SK_MATRIX_CONVOLUTION_TILEMODE,
 } sk_matrix_convolution_tilemode_t;
+
+/**
+    The logical operations that can be performed when combining two regions.
+*/
+typedef enum {
+    DIFFERENCE_SK_REGION_OP,          //!< subtract the op region from the first region
+    INTERSECT_SK_REGION_OP,           //!< intersect the two regions
+    UNION_SK_REGION_OP,               //!< union (inclusive-or) the two regions
+    XOR_SK_REGION_OP,                 //!< exclusive-or the two regions
+    REVERSE_DIFFERENCE_SK_REGION_OP,  //!< subtract the first region from the op region
+    REPLACE_SK_REGION_OP,             //!< replace the dst region with the op region
+} sk_region_op_t;
 
 SK_C_PLUS_PLUS_END_GUARD
 
